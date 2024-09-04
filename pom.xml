@@ -28,21 +28,10 @@
 		<url/>
 	</scm>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>21</java.version>
 		<spring-cloud.version>2023.0.3</spring-cloud.version>
 	</properties>
 	<dependencies>
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-starter-web</artifactId>-->
-<!--		</dependency>-->
-		<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-zuul -->
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.cloud</groupId>-->
-<!--			<artifactId>spring-cloud-starter-netflix-zuul</artifactId>-->
-<!--			<version>2.2.10.RELEASE</version>-->
-<!--		</dependency>-->
-		<!-- Add Spring Boot Starter WebFlux -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webflux</artifactId>
@@ -64,7 +53,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -97,12 +85,42 @@
 	</dependencyManagement>
 
 	<build>
+		<finalName>cv-api-gateway</finalName> <!-- This sets the final JAR name -->
+		
 		<plugins>
+			<!-- Git Commit ID Plugin -->
+			<plugin>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+				<version>4.0.5</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>revision</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+					<generateGitPropertiesFile>true</generateGitPropertiesFile>
+					<gitPropertiesFile>${project.build.outputDirectory}/git.properties</gitPropertiesFile>
+				</configuration>
+			</plugin>
+
+			<!-- Spring Boot Maven Plugin -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<manifestEntries>
+						<Implementation-Version>${project.version}</Implementation-Version>
+						<Git-Commit-Id>${git.commit.id}</Git-Commit-Id>
+						<Git-Branch>${git.branch}</Git-Branch>
+						<Built-By>${user.name}</Built-By>
+						<Build-Jdk>${java.version}</Build-Jdk>
+					</manifestEntries>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
