@@ -12,7 +12,7 @@
 	<groupId>com.app</groupId>
 	<artifactId>api-gateway</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>api-gateway</name>
+	<name>app-cv-api-gateway</name>
 	<description>API gateway application for  microservices project</description>
 	<url/>
 	<licenses>
