@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TestController {
-    @GetMapping("/api-gateway")
+    @GetMapping("/self")
     public String test() {
         return "API Gateway is working!";
     }
