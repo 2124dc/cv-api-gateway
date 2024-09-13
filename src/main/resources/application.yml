@@ -1,13 +1,8 @@
 spring:
   application:
     name: cv-api-gateway
-
   cloud:
     config:
-      uri: http://103.168.18.176:8061
-
-  profiles:
-    active: default
-
+      uri: http://localhost:8061
   config:
-    import: optional:configserver:${spring.cloud.config.uri}
+    import: optional:configserver:http://localhost:8061
